@@ -37,7 +37,7 @@ struct s_philo
 typedef struct s_rules  t_rules;
 struct s_rules
 {
-	int	nb_philo; //also corresponds to the nb of forks
+	int	nb_philos; //also corresponds to the nb of forks
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
@@ -48,7 +48,7 @@ struct s_rules
 /*
 FUNCTIONS FOR PARSING & ERRORS
 */
-int		parsing(int argc, char **argv);
+int	parsing(int argc, char **argv);
 void	error(char *str);
 
 /*
@@ -60,7 +60,7 @@ void	init_basics(t_rules *rules, char **argv);
 UTILS
 */
 char	*ft_itoa(int n);
-int		ft_atoi(const char *str);
+int	ft_atoi(const char *str);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 
 #endif
