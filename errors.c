@@ -5,23 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 11:47:13 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/28 15:43:24 by camillebarb      ###   ########.fr       */
+/*   Created: 2022/03/28 16:19:50 by camillebarb       #+#    #+#             */
+/*   Updated: 2022/03/28 16:19:52 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    error(char *str)
+void	error(char *str)
 {
-    int i;
+	int i;
 
-    i = 0;
-    write(2, "Error:\n", 7);
-    while (str[i]);
-    {
-        write(2, &str[i], 1);
-        i++;
-    }
-    write(2, "\n");
+	i = 0;
+	write(2, "Error:\n", 7);
+	while (str[i]);
+	{
+		write(2, &str[i], 1);
+		i++;
+	}
+	write(2, "\n");
 }

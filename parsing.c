@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 15:43:31 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/28 15:49:59 by camillebarb      ###   ########.fr       */
+/*   Created: 2022/03/28 16:20:19 by camillebarb       #+#    #+#             */
+/*   Updated: 2022/03/28 16:20:20 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	arg_is_digit(char *str, int i)
 	return (0);
 }
 
-int	arg_is_valid(char *str)
+static int	arg_is_valid(char *str)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ int	arg_is_valid(char *str)
 	return (0);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+static int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
@@ -43,7 +43,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int	check_overflow(char *str1)
+static int	check_overflow(char *str1)
 {
 	int		nb;
 	char	*str2;

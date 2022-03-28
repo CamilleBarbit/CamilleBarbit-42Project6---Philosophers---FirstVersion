@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/28 14:28:34 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/03/28 16:13:28 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,18 @@ struct s_rules
 	int	times_must_eat;
 	
 };
+
+/*
+FUNCTIONS FOR PARSING & ERRORS
+*/
+int		parsing(int argc, char **argv);
+void	error(char *str);
+
+/*
+FUNCTIONS TO INITIALIZE PHILO
+*/
+void	init_basics(t_rules *rules, char **argv);
+
+
 
 #endif
