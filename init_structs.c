@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 11:47:13 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/28 15:43:24 by camillebarb      ###   ########.fr       */
+/*   Created: 2022/03/28 14:07:06 by camillebarb       #+#    #+#             */
+/*   Updated: 2022/03/28 14:14:06 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    error(char *str)
+void    init_basics(t_rules *rules, char **argv)
 {
-    int i;
-
-    i = 0;
-    write(2, "Error:\n", 7);
-    while (str[i]);
-    {
-        write(2, &str[i], 1);
-        i++;
-    }
-    write(2, "\n");
+    rules->nb_philo = atoi(argv[1]);
+    rules->time_to_die = atoi(argv[2]);
+    rules->time_to_eat = atoi(argv[3]);
+    rules->time_to_sleep = atoi(argv[4]);
+    if (argv[5])
+        rules->times_must_eat = atoi(argv[5]);
+    else
+        rules->times_must_eat = 0;
 }
