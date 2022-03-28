@@ -42,7 +42,7 @@ struct s_rules
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	times_must_eat;
-	t_philo	*all_philo; //un tableau de struct de type t_philo
+	t_philo	*all_philos; //un tableau de struct de type t_philo
 };
 
 /*
