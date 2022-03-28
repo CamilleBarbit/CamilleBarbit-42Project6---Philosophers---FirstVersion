@@ -14,16 +14,19 @@
 
 int	init_basics(t_rules *rules, char **argv)
 {
-	rules->nb_philo = atoi(argv[1]);
+	rules->nb_philos = atoi(argv[1]);
 	rules->time_to_die = atoi(argv[2]);
 	rules->time_to_eat = atoi(argv[3]);
 	rules->time_to_sleep = atoi(argv[4]);
 	rules->times_must_eat = 0;
 	if (argv[5])
 		rules->times_must_eat = atoi(argv[5]);
-	if (rules->nb_philo < 1 || rules->nb_philo > 32768 || rules->time_to_die < 0
+	if (rules->nb_philos < 1 || rules->nb_philos > 32768 || rules->time_to_die < 0
 		|| rules->time_to_eat < 0 || rules->time_to_sleep < 0 || rules->times_must_eat < 0)
 		return (1);
-	init_philo(rules, philo);
+	rules->all_philos = malloc(sizeof(t_philo) * rules->nb_philos);
+	if (!rules->all_philos)
+		return (1);
+	init_philo(rules); //In theory, then, I fill the table rules->all_philos
 	return (0);	
 }
