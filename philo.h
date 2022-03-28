@@ -31,7 +31,7 @@ struct s_philo
 	int	left_fork_id;
 	int	right_fork_id;
 	int	times_eaten; //if there is a times_must_eat argument, we need to mornitor how many times each has eaten
-	int	times_last_meal;
+	int	time_last_meal;
 }
 
 typedef struct s_rules  t_rules;
@@ -42,7 +42,7 @@ struct s_rules
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	times_must_eat;
-	
+	t_philo	*philo; //un tableau de struct de type t_philo
 };
 
 /*
