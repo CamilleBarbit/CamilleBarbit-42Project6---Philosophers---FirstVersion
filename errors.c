@@ -6,11 +6,11 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:32:55 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/28 16:42:10 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/03/30 16:05:00 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 void	error(char *str)
 {
