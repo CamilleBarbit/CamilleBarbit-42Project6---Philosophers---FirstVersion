@@ -6,7 +6,7 @@
 #    By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/28 15:54:51 by camillebarb       #+#    #+#              #
-#    Updated: 2022/03/28 16:41:22 by camillebarb      ###   ########.fr        #
+#    Updated: 2022/03/30 16:04:46 by camillebarb      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RM = rm -rf
 
 C_FILES = philo.c \
 		init_structs.c \
-		parsing/errors.c \
+		errors.c \
 		parsing/parsing.c \
 		parsing/utils.c \
 		parsing/overflow_utils.c \
