@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/30 10:28:13 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/03/30 15:55:07 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ typedef struct s_philo t_philo;
 struct s_philo
 {
 	int	philo_id;
+	pthread_t	philo;
 	int	left_fork_id;
 	int	right_fork_id;
 	int	times_eaten; //if there is a times_must_eat argument, we need to mornitor how many times each has eaten
 	int	time_last_meal;
-}
+};
 
 typedef struct s_rules  t_rules;
 struct s_rules
@@ -44,8 +45,8 @@ struct s_rules
 	int	times_must_eat;
 	int	eaten_all; //variable to check whether they have eaten enough
 	int	is_dead; //variable to check whether a philosopher is dead -> it's a boolean
-	t_philo	*all_philos; //un tableau de struct de type t_philo
 	pthread_mutex_t	*forks; //un tableau de mutexes (forks)
+	t_philo	*all_philos; //un tableau de struct de type t_philo
 };
 
 /*
@@ -57,7 +58,9 @@ void	error(char *str);
 /*
 FUNCTIONS TO INITIALIZE PHILO
 */
-void	init_basics(t_rules *rules, char **argv);
+int	init_basics(t_rules *rules, char **argv);
+int		init_philos(t_rules *rules);
+int		init_mutexes(t_rules *rules);
 
 /*
 UTILS
