@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/30 15:55:07 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/03/30 16:31:33 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ struct s_philo
 	int	right_fork_id;
 	int	times_eaten; //if there is a times_must_eat argument, we need to mornitor how many times each has eaten
 	int	time_last_meal;
+	struct s_rules	*rules; //pk si je mets t_rules ça ne marche pas?
 };
 
 typedef struct s_rules  t_rules;

@@ -6,11 +6,23 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/30 15:54:51 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/03/30 16:21:58 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_count(t_philo)
+{
+	int	i;
+
+	i = 0
+	while (i < 10)
+	{
+		printf("Le nombre est: %d\n", i);
+		i++;
+	}
+}
 
 int	main(int argc, char **argv)
 {
