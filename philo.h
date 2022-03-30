@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/28 17:52:20 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/03/30 10:28:13 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ struct s_rules
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	times_must_eat;
+	int	eaten_all; //variable to check whether they have eaten enough
+	int	is_dead; //variable to check whether a philosopher is dead -> it's a boolean
 	t_philo	*all_philos; //un tableau de struct de type t_philo
+	pthread_mutex_t	*forks; //un tableau de mutexes (forks)
 };
 
 /*
 FUNCTIONS FOR PARSING & ERRORS
 */
-int	parsing(int argc, char **argv);
+int		parsing(int argc, char **argv);
 void	error(char *str);
 
 /*
@@ -60,7 +63,7 @@ void	init_basics(t_rules *rules, char **argv);
 UTILS
 */
 char	*ft_itoa(int n);
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 
 #endif
