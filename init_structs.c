@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/30 16:04:30 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/03/30 16:20:01 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	init_philos(t_rules *rules)
 		else
 			rules->all_philos[i].right_fork_id = i - 1;
 		rules->all_philos[i].times_eaten = 0;
-		// rules->all_philos[i].time_last_meal == //???
-		// if (pthread_create(rules->all_philos[i].philo)... != 0))
-		// 	return (1);
+		rules->all_philos[i].time_last_meal == 0 //not sure
+		if (pthread_create(rules->all_philos[i].philo, NULL, ft_count(t_philo), NULL) != 0)
+			return (1);
 	}
 	return (0);
 }
