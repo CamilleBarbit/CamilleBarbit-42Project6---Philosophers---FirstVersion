@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/31 12:24:38 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/03/31 14:19:12 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	init_philos(t_rules *rules)
 		rules->all_philos[i].time_last_meal = 0; //not sure
 		if (pthread_create(&rules->all_philos[i].philo, NULL, ft_count, &rules->all_philos[i]) != 0)
 			return (1);
+		printf("La valeur de i: %d\n", i);
+		i++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/28 15:54:51 by camillebarb       #+#    #+#              #
-#    Updated: 2022/03/31 12:27:56 by camillebarb      ###   ########.fr        #
+#    Updated: 2022/03/31 13:53:01 by camillebarb      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ all: ${NAME}
 	@${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME} : ${O_FILES}
-	@${CC} ${O_FILES} -o ${NAME}
+	@${CC} ${O_FILES} -pthread -o ${NAME}
 
 clean:
 	@${RM} ${O_FILES}
