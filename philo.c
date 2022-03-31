@@ -6,22 +6,27 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/30 16:21:58 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/03/31 12:26:32 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_count(t_philo)
+void	*ft_count(void *arg)
 {
 	int	i;
+	t_philo *philo;
 
-	i = 0
+	philo = (t_philo*)arg;
+	i = 0;
 	while (i < 10)
 	{
-		printf("Le nombre est: %d\n", i);
+		printf("Le nombre avant le thread est: %d\n", i);
 		i++;
+		printf("Le nombre après le thread est: %d\n", i);
 	}
+	printf("Le nombre de threads: %d\n", philo->rules->nb_philos);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -34,4 +39,5 @@ int	main(int argc, char **argv)
 		return(error("Wrong number of arguments"), 1);
 	if (parsing(argc, argv) == 1)
 		return (error("Invalid argument(s)"), 1);
+	return (0);
 }

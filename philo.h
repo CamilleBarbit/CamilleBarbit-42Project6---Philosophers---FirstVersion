@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/30 16:31:33 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/03/31 12:25:19 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ UTILS
 char	*ft_itoa(int n);
 int		ft_atoi(const char *str);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
+
+void	*ft_count(void *arg);
 
 #endif
