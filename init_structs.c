@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/08 17:49:53 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/08 18:13:44 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	init_philos(t_rules *rules, int i)
 		rules->all_philos[i].right_fork_id = i - 1;
 	rules->all_philos[i].times_eaten = 0;
 	rules->all_philos[i].time_last_meal = rules->start_time; //Au debut on prend le temps du debut de la simulation
+	rules->all_philos[i].is_alive = false;
+	rules->all_philos[i].rules = rules;
 	if (pthread_create(&rules->all_philos[i].philo, NULL, ft_count, &rules->all_philos[i]) != 0) //not sure about creating all the threads here
 		return (1);
 	//usleep(100); il ne faut pas lancer les threads en même temps
@@ -68,7 +70,7 @@ int	dispatch_philos(t_rules *rules)
 	return (0);
 }
 
-double	get_time(t_rules *rules)
+double	get_time()
 {
 	struct timeval	*time;
 	double	time_now;
@@ -84,7 +86,7 @@ int	init_basics(t_rules *rules, char **argv)
 	rules->time_to_die = atoi(argv[2]); //en millisecondes
 	rules->time_to_eat = atoi(argv[3]); //en millisecondes
 	rules->time_to_sleep = atoi(argv[4]); //en millisecondes
-	rules->start_time = get_time(rules); //en millisecondes
+	rules->start_time = get_time(); //en millisecondes
 	rules->eaten_all = false;
 	rules->are_dead = false;
 	if (rules->nb_philos < 1 || rules->nb_philos > 62464 || rules->time_to_die <= 0
