@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/08 17:26:33 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/08 17:49:53 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,40 @@ int	init_mutexes(t_rules *rules)
 	return (0);
 }
 
-int	init_philos(t_rules *rules)
+int	init_philos(t_rules *rules, int i)
+{
+	rules->all_philos[i].philo_id = i + 1;
+	rules->all_philos[i].left_fork_id = i;
+	if (i == 0)
+		rules->all_philos[i].right_fork_id = rules->nb_philos - 1;
+	else
+		rules->all_philos[i].right_fork_id = i - 1;
+	rules->all_philos[i].times_eaten = 0;
+	rules->all_philos[i].time_last_meal = rules->start_time; //Au debut on prend le temps du debut de la simulation
+	if (pthread_create(&rules->all_philos[i].philo, NULL, ft_count, &rules->all_philos[i]) != 0) //not sure about creating all the threads here
+		return (1);
+	//usleep(100); il ne faut pas lancer les threads en même temps
+	return (0);
+}
+
+int	dispatch_philos(t_rules *rules)
 {
 	int	i;
 
-	i = 0;
 	if (!(rules->all_philos = malloc(sizeof(t_philo) * rules->nb_philos)))
 		return (error("Malloc failed\n"), 1);
+	i = 0;
 	while (i < rules->nb_philos)
 	{
-		rules->all_philos[i].philo_id = i + 1;
-		rules->all_philos[i].left_fork_id = i;
-		if (i == 0)
-			rules->all_philos[i].right_fork_id = rules->nb_philos - 1;
-		else
-			rules->all_philos[i].right_fork_id = i - 1;
-		rules->all_philos[i].times_eaten = 0;
-		rules->all_philos[i].time_last_meal = rules->start_time; //Au debut on prend le temps du debut de la simulation
-		// if (pthread_create(&rules->all_philos[i].philo, NULL, ft_count, &rules->all_philos[i]) != 0) //not sure about creating all the threads here
-		// 	return (1);
-		// usleep(100); il ne faut pas lancer les threads en même temps
-		i++;
+		if (init_philos(rules, i) == 1);
+			return (1);
+		i += 2;
+	}
+	i = 1;
+	while (i < rules->nb_philos)
+	{
+		if (init_philos(rules, i) == 1);
+			return (1);
 	}
 	return (0);
 }
@@ -85,9 +98,7 @@ int	init_basics(t_rules *rules, char **argv)
 	}
 	else
 		rules->times_must_eat = 0;
-	if (init_mutexes(rules) == 1)
-		return (1);
-	if (init_philos(rules) == 1)
+	if (init_mutexes(rules) || dispatch_philos(rules) == 1)
 		return (1);
 	return (0);	
 }
