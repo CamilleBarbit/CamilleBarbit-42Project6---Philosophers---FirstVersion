@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/31 14:19:12 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/08 12:23:35 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	init_philos(t_rules *rules)
 			rules->all_philos[i].right_fork_id = i - 1;
 		rules->all_philos[i].times_eaten = 0;
 		rules->all_philos[i].time_last_meal = 0; //not sure
-		if (pthread_create(&rules->all_philos[i].philo, NULL, ft_count, &rules->all_philos[i]) != 0)
+		if (pthread_create(&rules->all_philos[i].philo, NULL, ft_count, &rules->all_philos[i]) != 0) //not sure about creating all the threads here
 			return (1);
-		printf("La valeur de i: %d\n", i);
+		usleep(100);
 		i++;
 	}
 	return (0);

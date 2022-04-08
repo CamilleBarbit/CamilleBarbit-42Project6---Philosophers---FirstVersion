@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/08 11:12:16 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/08 12:01:51 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ LIBRARIES
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 /*
 MAIN STRUCTURES
@@ -60,8 +61,8 @@ void	error(char *str);
 FUNCTIONS TO INITIALIZE PHILO
 */
 int	init_basics(t_rules *rules, char **argv);
-int		init_philos(t_rules *rules);
-int		init_mutexes(t_rules *rules);
+int	init_philos(t_rules *rules);
+int	init_mutexes(t_rules *rules);
 
 /*
 UTILS
