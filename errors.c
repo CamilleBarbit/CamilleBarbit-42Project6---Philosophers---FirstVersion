@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:32:55 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/30 16:05:00 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/08 16:26:51 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,4 @@ void	error(char *str)
 		write(2, &str[i], 1);
 		i++;
 	}
-	write(2, "\n", 1);
 }
