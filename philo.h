@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/03/31 14:24:42 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/08 11:12:16 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ typedef struct s_rules  t_rules;
 struct s_rules
 {
 	int	nb_philos; //also corresponds to the nb of forks
-	int	time_to_die;
+	int	time_to_die; //time_to_die + time_last_meal = is_dead
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	times_must_eat;
-	int	eaten_all; //variable to check whether they have eaten enough
-	int	is_dead; //variable to check whether a philosopher is dead -> it's a boolean -> can be of type bool
+	bool	eaten_all; //variable to check whether they have eaten enough
+	bool	is_dead; //variable to check whether a philosopher is dead -> it's a boolean -> can be of type bool
 	pthread_mutex_t	*forks; //un tableau de mutexes (forks)
 	t_philo	*all_philos; //un tableau de struct de type t_philo
 };
