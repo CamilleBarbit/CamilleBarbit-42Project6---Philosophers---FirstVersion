@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/08 16:27:08 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/12 10:59:29 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,7 @@
 
 void	*ft_count(void *arg)
 {
-	//int	i;
-	t_philo *philo;
-	//(void)arg;
-	philo = (t_philo*)arg;
-	//i = 0;
-	// while (i < 10)
-	// {
-	// 	printf("Le nombre est: %d\n", i);
-	// 	i++;
-	// }
-	printf("L'ID du thread': %d\n", philo->philo_id);
-	return (0);
+	
 }
 
 int	main(int argc, char **argv)

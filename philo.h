@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/11 11:58:02 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/12 10:57:20 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ struct s_philo
 {
 	int	philo_id;
 	pthread_t	philo;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
 	int	left_fork_id;
 	int	right_fork_id;
 	int	times_eaten; //if there is a times_must_eat argument, we need to mornitor how many times each has eaten
