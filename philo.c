@@ -6,22 +6,11 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/12 13:24:49 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/12 15:02:27 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	*ft_start(void *arg)
-{
-	t_philo	*philo; //la structure que j'envoie dans la fonction pthread_create
-	t_rules	*rules;
-	
-	philo = (t_philo*)arg;
-	rules = philo->rules;
-	while()
-	
-}
 
 int	main(int argc, char **argv)
 {
