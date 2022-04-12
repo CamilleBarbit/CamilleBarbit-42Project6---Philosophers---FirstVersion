@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/12 10:57:29 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/12 12:21:59 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	init_philos(t_rules *rules, int i)
 	rules->all_philos[i].time_last_meal = rules->start_time; //Au debut on prend le temps du debut de la simulation
 	rules->all_philos[i].is_alive = false;
 	rules->all_philos[i].rules = rules;
-	if (pthread_create(&rules->all_philos[i].philo, NULL, ft_count, &rules->all_philos[i]) != 0) //not sure about creating all the threads here
+	if (pthread_create(&rules->all_philos[i].philo, NULL, ft_start, &rules->all_philos[i]) != 0) //not sure about creating all the threads here
 		return (1);
 	//usleep(100); il ne faut pas lancer les threads en même temps
 	return (0);
