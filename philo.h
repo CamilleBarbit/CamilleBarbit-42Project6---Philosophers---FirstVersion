@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/12 10:57:20 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/12 19:05:25 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ struct s_rules
 	int	times_must_eat;//argv[5] -> optional
 	bool	eaten_all; //equals to 1 if all philo->times_eaten >= rules->times_must_eat
 	bool	are_dead; //equals to 1 if at least one philo is dead
+	pthread_mutex_t	*has_died;
 	pthread_mutex_t	*forks; //un tableau de mutexes (forks)
 	pthread_mutex_t	*msg; //lock the messages
 	t_philo	*all_philos; //un tableau de struct de type t_philo

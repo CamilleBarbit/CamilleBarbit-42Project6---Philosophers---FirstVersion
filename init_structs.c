@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/12 12:21:59 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/12 19:05:21 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	init_mutexes(t_rules *rules)
 		i++;
 	}
 	if (pthread_mutex_init(&rules->msg, NULL) != 0)
-		return (error("Failed to init mutexes\n"), 1); 
+		return (error("Failed to init mutexes\n"), 1);
+	if (pthread_mutex_init(&rules->has_died, NULL) != 0)
+		return (error("Failed to init mutexes\n"), 1);
 	return (0);
 }
 
@@ -86,9 +88,9 @@ int	init_basics(t_rules *rules, char **argv)
 	rules->time_to_die = atoi(argv[2]); //en millisecondes
 	rules->time_to_eat = atoi(argv[3]); //en millisecondes
 	rules->time_to_sleep = atoi(argv[4]); //en millisecondes
-	rules->start_time = get_time(); //en millisecondes
-	rules->eaten_all = false;
-	rules->are_dead = false;
+	rules->start_time = get_time(); //en millisecondes -> début de la simulation
+	rules->eaten_all = false; //0
+	rules->are_dead = false; //0
 	if (rules->nb_philos < 1 || rules->nb_philos > 62464 || rules->time_to_die <= 0
 		|| rules->time_to_eat <= 0 || rules->time_to_sleep <= 0)
 		return (error("Invalid argument value\n"), 1);
@@ -100,7 +102,7 @@ int	init_basics(t_rules *rules, char **argv)
 	}
 	else
 		rules->times_must_eat = 0;
-	if (init_mutexes(rules) || dispatch_philos(rules) == 1)
+	if (init_mutexes(rules) == 1 || dispatch_philos(rules) == 1)
 		return (1);
 	return (0);	
 }
