@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   messages.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:32:55 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/08 16:26:51 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:09:19 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,16 @@ void	error(char *str)
 		write(2, &str[i], 1);
 		i++;
 	}
+}
+
+int	action(t_rules *rules, t_philo *philo, char *str)
+{
+	if (pthread_mutex_lock(rules->msg) != 0)
+		return (1);
+	printf("%ld ", (get_time() - rules->start_time)); //pour calculer le timestamp
+	printf("%d ", philo->id);
+	printf("%s\n", str);
+	if (pthread_mutex_unlock(rules->msg) != 0)
+		return (1);
+	return (0);
 }

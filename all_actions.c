@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/12 19:05:15 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/12 19:09:07 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,6 @@ void	philo_is_sleeping(t_philo *philo, t_rules *rules)
 	action(rules, philo, "is sleeping");
 	usleep_eat_think(rules, rules->time_to_sleep);
 }
-
-
-    
-
 
 void	*ft_start(void *arg)
 {
