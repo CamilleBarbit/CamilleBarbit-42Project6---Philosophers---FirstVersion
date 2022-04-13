@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 10:13:11 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 11:54:14 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ struct s_philo
 	int	left_fork_id;
 	int	right_fork_id;
 	int	times_eaten; //if there is a times_must_eat argument, we need to mornitor how many times each has eaten
+	bool	status; //0 means not doing anything - 1 means eating or sleeping
 	double	time_last_meal; //need to be updated everytime the philo eats //at first, it is equal to start_time
 	bool	is_alive; //check if the philo is alive
 	struct s_rules	*rules; //pk si je mets t_rules ça ne marche pas?
@@ -67,7 +68,8 @@ void	error(char *str);
 FUNCTIONS TO INITIALIZE PHILO
 */
 int	init_basics(t_rules *rules, char **argv);
-int	init_philos(t_rules *rules);
+int	init_philos(t_rules *rules, int i);
+int	dispatch_philos(t_rules *rules);
 int	init_mutexes(t_rules *rules);
 
 /*
@@ -77,6 +79,17 @@ char	*ft_itoa(int n);
 int		ft_atoi(const char *str);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 
-void	*ft_count(void *arg);
+/*
+DAILY ROUTINE
+*/
+void	*ft_start_daily_routine(void *arg);
+void	usleep_eat_think(t_rules *rules, double time);
+void	philo_is_sleeping(t_philo *philo, t_rules *rules);
+int	philo_is_eating(t_philo *philo, t_rules *rules);
+
+/*
+UTILS
+*/
+double	get_time();
 
 #endif

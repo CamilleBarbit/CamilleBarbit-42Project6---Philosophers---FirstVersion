@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 10:55:39 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 11:55:53 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ int	philo_is_eating(t_philo *philo, t_rules *rules)
 {
 	if (grab_forks(philo, rules) == 1)
 		return (1);
+	philo->status = true;
 	action(rules, philo, "is eating");
 	philo->time_last_meal = get_time(); //Update heure du début de dernier repas
 	usleep_eat_think(rules, rules->time_to_eat);
 	philo->times_eaten++;
+	philo->status = false;
 	if (drop_forks(philo, rules) == 1)
 		return (1);
 	//if (philo->times_eaten == rules->times_must_eat) //we will have to do something
@@ -41,7 +43,7 @@ void	philo_is_sleeping(t_philo *philo, t_rules *rules)
 	usleep_eat_think(rules, rules->time_to_sleep);
 }
 
-void	*ft_start(void *arg)
+void	*ft_start_daily_routine(void *arg)
 {
 	t_philo	*philo; //la structure que j'envoie dans la fonction pthread_create
 	t_rules	*rules;
@@ -49,10 +51,10 @@ void	*ft_start(void *arg)
 	philo = (t_philo*)arg;
 	rules = philo->rules;
 
-	while(rules->are_dead == false)
+	while(philo->is_alive == false)
 	{
 		if (philo_is_eating(philo, rules) == 1)
-			return (1);
+			return (NULL);
 		philo_is_sleeping(philo, rules);
 		action(rules, philo, "is thinking");
 	}

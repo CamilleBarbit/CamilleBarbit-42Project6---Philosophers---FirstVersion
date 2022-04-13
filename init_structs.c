@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 10:57:03 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 12:00:50 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ int	init_philos(t_rules *rules, int i)
 	rules->all_philos[i].times_eaten = 0;
 	rules->all_philos[i].time_last_meal = rules->start_time; //Au debut on prend le temps du debut de la simulation
 	rules->all_philos[i].is_alive = false;
+	rules->all_philos[i].status = false;
 	rules->all_philos[i].rules = rules;
 	if (pthread_create(&rules->all_philos[i].philo, NULL, ft_start, &rules->all_philos[i]) != 0) //not sure about creating all the threads here
 		return (1);
-	usleep(50);
+	//usleep(50);
 	return (0);
 }
 
@@ -60,15 +61,16 @@ int	dispatch_philos(t_rules *rules)
 	i = 0;
 	while (i < rules->nb_philos)
 	{
-		if (init_philos(rules, i) == 1);
+		if (init_philos(rules, i) == 1)
 			return (1);
 		i += 2;
 	}
 	i = 1;
 	while (i < rules->nb_philos)
 	{
-		if (init_philos(rules, i) == 1);
+		if (init_philos(rules, i) == 1)
 			return (1);
+		i += 2;
 	}
 	return (0);
 }
@@ -102,7 +104,7 @@ int	init_basics(t_rules *rules, char **argv)
 	}
 	else
 		rules->times_must_eat = -1;
-	if (init_mutexes(rules) == 1 || dispatch_philos(rules) == 1)
+	if (init_mutexes(rules) == 1)
 		return (1);
 	return (0);	
 }

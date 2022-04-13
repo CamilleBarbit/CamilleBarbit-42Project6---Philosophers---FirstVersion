@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/12 19:09:21 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 12:01:03 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(int argc, char **argv)
 	if (!(rules = malloc(sizeof(t_rules))))
 		return (error("Malloc failed\n"), 1);
 	if (init_basics(rules, argv) == 1)
+		return (1);
+	if (dispatch_philos(rules) == 1)
 		return (1);
 	return (0);
 }
