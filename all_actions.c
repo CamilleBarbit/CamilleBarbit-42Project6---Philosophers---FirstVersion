@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 14:58:03 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 15:22:27 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	*ft_start_daily_routine(void *arg)
 	philo = (t_philo*)arg;
 	rules = philo->rules;
 
-	while(philo->is_alive == false)
+	while(philo->is_alive == false && eaten_enough(philo, rules) != 0)
 	{
 		if (philo_is_eating(philo, rules) == 1)
 			return (NULL);
