@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/12 19:09:07 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 10:55:39 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,18 @@ void	usleep_eat_think(t_rules *rules, double time)
 		usleep(50);
 }
 
-void	philo_is_eating(t_philo *philo, t_rules *rules)
+int	philo_is_eating(t_philo *philo, t_rules *rules)
 {
-	if (pthread_mutex_lock(&rules->forks[philo->left_fork_id]) != 0) //on envoie ce qu'il y a à cette adresse
-        return (1);
-    action(rules, philo, "has taken [left] fork"); //lock la fourchette de gauche
-    if (pthread_mutex_lock(&rules->forks[philo->right_fork_id]) != 0)
-        return (1);
-    action(rules, philo, "has taken [right] fork"); //lock la fourchette de droite
-    action(rules, philo, "is eating"); //il est entrain de manger
+	if (grab_forks(philo, rules) == 1)
+		return (1);
+	action(rules, philo, "is eating");
 	philo->time_last_meal = get_time(); //Update heure du début de dernier repas
 	usleep_eat_think(rules, rules->time_to_eat);
 	philo->times_eaten++;
-	if (pthread_mutex_unlock(&rules->forks[philo->left_fork_id]) != 0)
+	if (drop_forks(philo, rules) == 1)
 		return (1);
-	if (pthread_mutex_unlock(&rules->forks[philo->right_fork_id]) != 0)
-		return (1);	
-	if (philo->times_eaten == rules->times_must_eat) //we will have to do something
+	//if (philo->times_eaten == rules->times_must_eat) //we will have to do something
+	return (0);
 }
 
 void	philo_is_sleeping(t_philo *philo, t_rules *rules)
@@ -56,7 +51,10 @@ void	*ft_start(void *arg)
 
 	while(rules->are_dead == false)
 	{
-		philo_is_eating(philo, rules);
+		if (philo_is_eating(philo, rules) == 1)
+			return (1);
+		philo_is_sleeping(philo, rules);
+		action(rules, philo, "is thinking");
 	}
 	
 }

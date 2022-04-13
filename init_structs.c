@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/12 19:09:13 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 10:57:03 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	init_philos(t_rules *rules, int i)
 	rules->all_philos[i].rules = rules;
 	if (pthread_create(&rules->all_philos[i].philo, NULL, ft_start, &rules->all_philos[i]) != 0) //not sure about creating all the threads here
 		return (1);
-	//usleep(100); il ne faut pas lancer les threads en même temps
+	usleep(50);
 	return (0);
 }
 
@@ -56,6 +56,7 @@ int	dispatch_philos(t_rules *rules)
 
 	if (!(rules->all_philos = malloc(sizeof(t_philo) * rules->nb_philos)))
 		return (error("Malloc failed\n"), 1);
+	rules->start_time = get_time(); //en millisecondes -> début de la simulation
 	i = 0;
 	while (i < rules->nb_philos)
 	{
@@ -88,7 +89,6 @@ int	init_basics(t_rules *rules, char **argv)
 	rules->time_to_die = atoi(argv[2]); //en millisecondes
 	rules->time_to_eat = atoi(argv[3]); //en millisecondes
 	rules->time_to_sleep = atoi(argv[4]); //en millisecondes
-	rules->start_time = get_time(); //en millisecondes -> début de la simulation
 	rules->eaten_all = false; //0
 	rules->are_dead = false; //0
 	if (rules->nb_philos < 1 || rules->nb_philos > 62464 || rules->time_to_die <= 0
@@ -101,7 +101,7 @@ int	init_basics(t_rules *rules, char **argv)
 			return (error("Invalid argument value\n"), 1);	
 	}
 	else
-		rules->times_must_eat = 0;
+		rules->times_must_eat = -1;
 	if (init_mutexes(rules) == 1 || dispatch_philos(rules) == 1)
 		return (1);
 	return (0);	
