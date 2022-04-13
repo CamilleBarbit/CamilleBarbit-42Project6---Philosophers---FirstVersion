@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 15:21:36 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 16:54:32 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ struct s_philo
 	double	time_last_meal; //need to be updated everytime the philo eats //at first, it is equal to start_time
 	bool	is_alive; //check if the philo is alive
 	struct s_rules	*rules; //pk si je mets t_rules ça ne marche pas?
+	pthread_mutex_t	is_dead; //mutex qui protège le booléen is_alive -> le thread checker et le thred philo y ont accès
 };
 
 typedef struct s_rules  t_rules;
@@ -51,7 +52,7 @@ struct s_rules
 	int	times_must_eat;//argv[5] -> optional
 	bool	eaten_all; //equals to 1 if all philo->times_eaten >= rules->times_must_eat
 	bool	are_dead; //equals to 1 if at least one philo is dead
-	pthread_mutex_t	*has_died;
+	pthread_mutex_t	*has_died; //mutex qui protège le booléen are_dead ->seul le thread checker y a accès
 	pthread_mutex_t	*forks; //un tableau de mutexes (forks)
 	pthread_mutex_t	*msg; //lock the messages
 	pthread_t	checker;
