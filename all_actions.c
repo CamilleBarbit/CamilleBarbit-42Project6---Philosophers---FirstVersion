@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 11:55:53 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 12:12:13 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ int	philo_is_eating(t_philo *philo, t_rules *rules)
 {
 	if (grab_forks(philo, rules) == 1)
 		return (1);
-	philo->status = true;
 	action(rules, philo, "is eating");
 	philo->time_last_meal = get_time(); //Update heure du début de dernier repas
 	usleep_eat_think(rules, rules->time_to_eat);
 	philo->times_eaten++;
-	philo->status = false;
 	if (drop_forks(philo, rules) == 1)
 		return (1);
 	//if (philo->times_eaten == rules->times_must_eat) //we will have to do something

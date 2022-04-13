@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 11:54:14 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 12:09:32 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ struct s_philo
 	int	left_fork_id;
 	int	right_fork_id;
 	int	times_eaten; //if there is a times_must_eat argument, we need to mornitor how many times each has eaten
-	bool	status; //0 means not doing anything - 1 means eating or sleeping
 	double	time_last_meal; //need to be updated everytime the philo eats //at first, it is equal to start_time
 	bool	is_alive; //check if the philo is alive
 	struct s_rules	*rules; //pk si je mets t_rules ça ne marche pas?
