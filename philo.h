@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 12:09:32 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 14:58:41 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ struct s_rules
 	pthread_mutex_t	*has_died;
 	pthread_mutex_t	*forks; //un tableau de mutexes (forks)
 	pthread_mutex_t	*msg; //lock the messages
+	pthread_t	checker;
 	t_philo	*all_philos; //un tableau de struct de type t_philo
 };
 
@@ -66,10 +67,10 @@ void	error(char *str);
 /*
 FUNCTIONS TO INITIALIZE PHILO
 */
-int	init_basics(t_rules *rules, char **argv);
-int	init_philos(t_rules *rules, int i);
-int	dispatch_philos(t_rules *rules);
-int	init_mutexes(t_rules *rules);
+int		init_basics(t_rules *rules, char **argv);
+void	init_philos(t_rules *rules);
+int		dispatch_philos(t_rules *rules);
+int		init_mutexes(t_rules *rules);
 
 /*
 UTILS
@@ -84,7 +85,7 @@ DAILY ROUTINE
 void	*ft_start_daily_routine(void *arg);
 void	usleep_eat_think(t_rules *rules, double time);
 void	philo_is_sleeping(t_philo *philo, t_rules *rules);
-int	philo_is_eating(t_philo *philo, t_rules *rules);
+int		philo_is_eating(t_philo *philo, t_rules *rules);
 
 /*
 UTILS
