@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 16:34:37 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 17:30:32 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,5 @@ void	*ft_start_daily_routine(void *arg)
 		philo_is_sleeping(philo, rules);
 		action(rules, philo, "is thinking");
 	}
+	return (NULL);
 }

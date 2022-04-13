@@ -6,7 +6,7 @@
 #    By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/28 15:54:51 by camillebarb       #+#    #+#              #
-#    Updated: 2022/04/13 16:29:56 by camillebarb      ###   ########.fr        #
+#    Updated: 2022/04/13 17:25:53 by camillebarb      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ RM = rm -rf
 
 C_FILES = philo.c \
 		init_structs.c \
-		errors.c \
 		all_actions.c \
 		check_philo_state.c \
 		messages.c \

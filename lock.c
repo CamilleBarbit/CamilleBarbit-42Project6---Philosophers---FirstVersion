@@ -6,13 +6,13 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 10:26:19 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 14:58:23 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 17:26:38 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int    grab_forks(t_philo *philo, t_rules *rules)
+int	grab_forks(t_philo *philo, t_rules *rules)
 {
 	if (pthread_mutex_lock(&rules->forks[philo->left_fork_id]) != 0) //on envoie ce qu'il y a à cette adresse
  		return (1);
@@ -23,7 +23,7 @@ int    grab_forks(t_philo *philo, t_rules *rules)
 	return (0);
 }
 
-int drop_forks(t_philo *philo, t_rules *rules)
+int	drop_forks(t_philo *philo, t_rules *rules)
 {
 	if (pthread_mutex_unlock(&rules->forks[philo->left_fork_id]) != 0)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 14:58:19 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 17:25:33 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	init_mutexes(t_rules *rules)
 			return (error("Failed to init mutexes\n"), 1);
 		i++;
 	}
-	if (pthread_mutex_init(&rules->msg, NULL) != 0)
+	if (pthread_mutex_init(rules->msg, NULL) != 0)
 		return (error("Failed to init mutexes\n"), 1);
-	if (pthread_mutex_init(&rules->has_died, NULL) != 0)
+	if (pthread_mutex_init(rules->has_died, NULL) != 0)
 		return (error("Failed to init mutexes\n"), 1);
 	return (0);
 }
@@ -50,7 +50,6 @@ int	init_philos(t_rules *rules)
 		rules->all_philos[i].times_eaten = 0;
 		rules->all_philos[i].time_last_meal = rules->start_time; //Au debut on prend le temps du debut de la simulation
 		rules->all_philos[i].is_alive = false;
-		rules->all_philos[i].status = false;
 		rules->all_philos[i].rules = rules;
 		i++;
 	}

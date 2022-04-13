@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:15:36 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 15:22:56 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 17:34:39 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double	get_time()
 {
-	struct timeval	*time;
+	struct timeval  *time;
 	double	time_now;
 	
 	gettimeofday(time, NULL);

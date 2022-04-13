@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 16:55:17 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/13 17:28:01 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	error(char *str);
 /*
 FUNCTIONS TO INITIALIZE PHILO
 */
-int		init_basics(t_rules *rules, char **argv);
-void	init_philos(t_rules *rules);
-int		dispatch_philos(t_rules *rules);
-int		init_mutexes(t_rules *rules);
+int	init_basics(t_rules *rules, char **argv);
+int	init_philos(t_rules *rules);
+int	dispatch_philos(t_rules *rules);
+int	init_mutexes(t_rules *rules);
 
 /*
 UTILS
@@ -88,6 +88,9 @@ void	usleep_eat_think(t_rules *rules, double time);
 void	philo_is_sleeping(t_philo *philo, t_rules *rules);
 int		philo_is_eating(t_philo *philo, t_rules *rules);
 int 	eaten_enough(t_philo *philo, t_rules *rules);
+int		grab_forks(t_philo *philo, t_rules *rules);
+int		drop_forks(t_philo *philo, t_rules *rules);
+int		action(t_rules *rules, t_philo *philo, char *str);
 
 /*
 UTILS
