@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/14 11:21:07 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/14 11:50:00 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	dispatch_philos(t_rules *rules);
 int	init_main_mutexes(t_rules *rules);
 
 /*
-UTILS
+PARSING UTILS
 */
 char	*ft_itoa(int n);
 int		ft_atoi(const char *str);
@@ -97,5 +97,6 @@ int		action(t_rules *rules, t_philo *philo, char *str);
 UTILS
 */
 double	get_time();
+double	get_diff(double time);
 
 #endif
