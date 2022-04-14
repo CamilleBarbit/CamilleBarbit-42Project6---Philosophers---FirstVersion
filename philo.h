@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 20:13:34 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/14 11:18:46 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ struct s_philo
 	int	times_eaten; //if there is a times_must_eat argument, we need to mornitor how many times each has eaten
 	int	status;
 	double	time_last_meal; //need to be updated everytime the philo eats //at first, it is equal to start_time
-	bool	is_alive; //check if the philo is alive
+	bool	*is_dead; //if philo dead -> he modifies the rules->are_dead directly
+	pthread_mutex_t	*dead; //mutex qui protège le booléen is_alive -> le thread checker et le thred philo y ont accès
 	struct s_rules	*rules; //pk si je mets t_rules ça ne marche pas?
-	pthread_mutex_t	is_dead; //mutex qui protège le booléen is_alive -> le thread checker et le thred philo y ont accès
 };
 
 typedef struct s_rules  t_rules;
@@ -53,7 +53,7 @@ struct s_rules
 	int	times_must_eat;//argv[5] -> optional
 	bool	eaten_all; //equals to 1 if all philo->times_eaten >= rules->times_must_eat
 	bool	are_dead; //equals to 1 if at least one philo is dead
-	pthread_mutex_t	*has_died; //mutex qui protège le booléen are_dead ->seul le thread checker y a accès
+	pthread_mutex_t	have_died; //mutex qui protège le booléen are_dead ->seul le thread checker y a accès
 	pthread_mutex_t	*forks; //un tableau de mutexes (forks)
 	pthread_mutex_t	*msg; //lock the messages
 	pthread_t	checker;
@@ -72,7 +72,7 @@ FUNCTIONS TO INITIALIZE PHILO
 int	init_basics(t_rules *rules, char **argv);
 int	init_philos(t_rules *rules);
 int	dispatch_philos(t_rules *rules);
-int	init_mutexes(t_rules *rules);
+int	init_main_mutexes(t_rules *rules);
 
 /*
 UTILS

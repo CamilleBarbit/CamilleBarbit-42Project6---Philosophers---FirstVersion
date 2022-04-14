@@ -6,13 +6,13 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/13 20:14:23 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/14 11:18:39 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_mutexes(t_rules *rules)
+int	init_main_mutexes(t_rules *rules)
 {
 	int	i;
 	
@@ -27,7 +27,7 @@ int	init_mutexes(t_rules *rules)
 	}
 	if (pthread_mutex_init(rules->msg, NULL) != 0)
 		return (error("Failed to init mutexes\n"), 1);
-	if (pthread_mutex_init(rules->has_died, NULL) != 0)
+	if (pthread_mutex_init(&rules->have_died, NULL) != 0) //pas sûre d'en avoir besoin
 		return (error("Failed to init mutexes\n"), 1);
 	return (0);
 }
@@ -49,8 +49,11 @@ int	init_philos(t_rules *rules)
 			rules->all_philos[i].right_fork_id = i - 1;
 		rules->all_philos[i].times_eaten = 0;
 		rules->all_philos[i].time_last_meal = rules->start_time; //Au debut on prend le temps du debut de la simulation
-		rules->all_philos[i].is_alive = false;
+		rules->all_philos[i].is_dead = &rules->are_dead;
 		rules->all_philos[i].rules = rules;
+		if (pthread_mutex_init(&rules->all_philos[i].dead, NULL) != 0) //pas sûre d'en avoir besoin
+			return (error("Failed to init mutexes\n"), 1);
+		rules->all_philos[i].dead = &rules->have_died;
 		i++;
 	}
 	return (0);
@@ -75,7 +78,7 @@ int	init_basics(t_rules *rules, char **argv)
 	}
 	else
 		rules->times_must_eat = -1;
-	if (init_mutexes(rules) == 1 || init_philos(rules) == 1)
+	if (init_main_mutexes(rules) == 1 || init_philos(rules) == 1)
 		return (1);
 	return (0);	
 }
