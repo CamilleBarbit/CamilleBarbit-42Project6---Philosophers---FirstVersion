@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/14 12:03:52 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/14 14:36:24 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_philo t_philo;
 struct s_philo
 {
 	int	philo_id;
-	pthread_t	philo;
 	int	left_fork_id;
 	int	right_fork_id;
 	int	times_eaten; //if there is a times_must_eat argument, we need to mornitor how many times each has eaten
@@ -39,6 +38,7 @@ struct s_philo
 	double	time_last_meal; //need to be updated everytime the philo eats //at first, it is equal to start_time
 	bool	*is_dead; //if philo dead -> he modifies the rules->are_dead directly
 	pthread_mutex_t	*dead; //mutex qui protège le booléen is_alive -> le thread checker et le thred philo y ont accès
+	pthread_t	philo;
 	struct s_rules	*rules; //pk si je mets t_rules ça ne marche pas?
 };
 
@@ -85,6 +85,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len);
 DAILY ROUTINE
 */
 void	*ft_start_daily_routine(void *arg);
+void	*ft_check_threads(void *arg);
 void	usleep_eat_think(t_rules *rules, double time);
 void	philo_is_sleeping(t_philo *philo, t_rules *rules);
 void	philo_is_eating(t_philo *philo, t_rules *rules);
@@ -93,9 +94,10 @@ int 	eaten_enough(t_philo *philo, t_rules *rules);
 int		grab_forks(t_philo *philo, t_rules *rules);
 int		drop_forks(t_philo *philo, t_rules *rules);
 int		action(t_rules *rules, t_philo *philo, char *str);
+int		philo_is_dead(t_philo *philo, t_rules *rules);
 
 /*
-UTILS
+ROUTINE UTILS
 */
 double	get_time();
 double	get_diff(double time);
