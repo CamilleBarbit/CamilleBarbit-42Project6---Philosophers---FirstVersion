@@ -6,7 +6,7 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/14 11:50:00 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/14 12:03:52 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ DAILY ROUTINE
 void	*ft_start_daily_routine(void *arg);
 void	usleep_eat_think(t_rules *rules, double time);
 void	philo_is_sleeping(t_philo *philo, t_rules *rules);
-int		philo_is_eating(t_philo *philo, t_rules *rules);
+void	philo_is_eating(t_philo *philo, t_rules *rules);
+int		can_philo_eat(t_philo *philo, t_rules *rules);
 int 	eaten_enough(t_philo *philo, t_rules *rules);
 int		grab_forks(t_philo *philo, t_rules *rules);
 int		drop_forks(t_philo *philo, t_rules *rules);
