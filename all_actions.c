@@ -6,27 +6,42 @@
 /*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/14 11:48:25 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/14 12:12:29 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.c"
 
-int	philo_is_eating(t_philo *philo, t_rules *rules)
+void	philo_is_dead (t_philo *philo, t_rules *rules)
+{
+	pthread_mutex_lock(philo->dead);
+	*(philo->dead) = true;
+	pthread_mutex_unlock(philo->dead);
+}
+
+void	philo_is_eating(t_philo *philo, t_rules *rules)
+{
+	action(rules, philo, "is eating");
+	philo->status = 0; //il mange //est-ce important?
+	philo->time_last_meal = get_time(); //Update heure du début de dernier repas
+	usleep_eat_think(rules, rules->time_to_eat);
+	philo->times_eaten++;
+}
+
+int	can_philo_eat(t_philo *philo, t_rules *rules)
 {
 	if (grab_forks(philo, rules) == 1)
 		return (1);
-	if (rules->time_last_meal + rules->time_to_eat < rules->time_to_die)
-	{
-		action(rules, philo, "is eating");
-		philo->status = 0; //il mange //est-ce important?
-		philo->time_last_meal = get_time(); //Update heure du début de dernier repas
-		usleep_eat_think(rules, rules->time_to_eat);
-		philo->times_eaten++;
-	}
+	if (rules->time_last_meal + rules->time_to_eat < rules->time_to_die) //to change
+		philo_is_eating(philo, rules);
 	else
+	{
 		usleep_eat_think(rules, rules->time_to_die - get_diff(rules->time_last_meal))
-		//écrire une fonction genre I am dead -> où il modifie la variable en question 
+		//écrire une fonction genre I am dead -> où il modifie la variable en question
+		if (drop_forks(philo, rules) == 1)
+			return (1);
+		return (1);
+	}
 	//if (philo->times_eaten == rules->times_must_eat) //we will have to do something
 	if (drop_forks(philo, rules) == 1)
 		return (1);
