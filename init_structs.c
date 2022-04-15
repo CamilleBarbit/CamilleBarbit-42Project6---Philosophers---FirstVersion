@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 12:14:20 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/15 14:10:44 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_main_mutexes(t_rules *rules)
 	}
 	if (pthread_mutex_init(&rules->msg, NULL) != 0)
 		return (error("Failed to init mutexes\n"), 1);
-	if (pthread_mutex_init(&rules->have_died, NULL) != 0) //pas sûre d'en avoir besoin
+	if (pthread_mutex_init(&rules->have_died, NULL) != 0)
 		return (error("Failed to init mutexes\n"), 1);
 	return (0);
 }
@@ -73,7 +73,7 @@ int	init_basics(t_rules *rules, char **argv)
 	rules->time_to_die = atoi(argv[2]); //en millisecondes
 	rules->time_to_eat = atoi(argv[3]); //en millisecondes
 	rules->time_to_sleep = atoi(argv[4]); //en millisecondes
-	rules->eaten_all = false; //0 ->variale à exploiter!
+	rules->eaten_all = false; //0 -> variale à exploiter!
 	rules->are_dead = false; //0
 	if (rules->nb_philos < 1 || rules->nb_philos > 62464 || rules->time_to_die <= 0
 		|| rules->time_to_eat <= 0 || rules->time_to_sleep <= 0)

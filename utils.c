@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:15:36 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/14 11:49:22 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/15 14:41:07 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	usleep_eat_think(t_rules *rules, double time)
 
 	i = get_time(); //l'heure à laquelle je commence mon action
 	while (get_time() - i < time)
-		usleep(50);
+		if (usleep(50) != 0)
+			return;
 }
