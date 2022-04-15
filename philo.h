@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 16:46:36 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/15 17:52:16 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ struct s_philo
 	int	left_fork_id;
 	int	right_fork_id;
 	int	times_eaten; //if there is a times_must_eat argument, we need to mornitor how many times each has eaten
-	int	status;
 	double	time_last_meal; //need to be updated everytime the philo eats //at first, it is equal to start_time
-	bool	*is_dead; //if philo dead -> he modifies the rules->are_dead directly
 	pthread_mutex_t	*dead; //mutex qui protège le booléen is_alive -> le thread checker et le thred philo y ont accès
 	pthread_mutex_t	*state;
 	pthread_t	philo;
@@ -74,7 +72,6 @@ int	init_basics(t_rules *rules, char **argv);
 int	init_philos(t_rules *rules);
 int	dispatch_philos(t_rules *rules);
 int	init_main_mutexes(t_rules *rules);
-int	init_philo_mutexes(t_rules *rules, int i);
 
 /*
 PARSING UTILS
@@ -97,6 +94,7 @@ int		grab_forks(t_philo *philo, t_rules *rules);
 int		drop_forks(t_philo *philo, t_rules *rules);
 int		action(t_rules *rules, t_philo *philo, char *str);
 int		philo_is_dead(t_philo *philo, t_rules *rules);
+int 	check_die(t_philo *philo, t_rules *rules);
 
 /*
 ROUTINE UTILS
