@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/14 14:05:19 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/15 12:09:58 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	dispatch_philos(t_rules *rules)
 	rules->start_time = get_time(); //en millisecondes -> début de la simulation
 	i = 0;
 	if (pthread_create(&rules->checker, NULL, &ft_check_threads, &rules) != 0)
-		return (1);
+		return (1); //je crée le thread qui monitor
 	while (i < rules->nb_philos)
 	{
 		if (pthread_create(&rules->all_philos[i].philo, NULL, &ft_start_daily_routine, &rules->all_philos[i]) != 0)

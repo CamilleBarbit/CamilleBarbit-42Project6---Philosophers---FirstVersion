@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/14 14:39:00 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/15 11:33:39 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	can_philo_eat(t_philo *philo, t_rules *rules)
 void	philo_is_sleeping(t_philo *philo, t_rules *rules)
 {
 	action(rules, philo, "is sleeping");
-	philo->status = 1; //il dort
+	philo->status = 1; //le philo dort
 	usleep_eat_think(rules, rules->time_to_sleep);
 }
 
@@ -60,7 +60,10 @@ void	*ft_start_daily_routine(void *arg)
 			return (NULL);
 		philo_is_sleeping(philo, rules);
 		if (philo->status != 0)
+		{
+			philo->status = 2; //le philo pense
 			action(rules, philo, "is thinking");
+		}
 	}
 	return (NULL);
 }

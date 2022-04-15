@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/14 11:20:55 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/15 12:14:20 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,19 @@ int	init_main_mutexes(t_rules *rules)
 			return (error("Failed to init mutexes\n"), 1);
 		i++;
 	}
-	if (pthread_mutex_init(rules->msg, NULL) != 0)
+	if (pthread_mutex_init(&rules->msg, NULL) != 0)
 		return (error("Failed to init mutexes\n"), 1);
 	if (pthread_mutex_init(&rules->have_died, NULL) != 0) //pas sûre d'en avoir besoin
 		return (error("Failed to init mutexes\n"), 1);
+	return (0);
+}
+
+int	init_philo_mutexes(t_rules *rules, int i)
+{
+	if (pthread_mutex_init(&rules->all_philos[i].dead, NULL) != 0) //pas sûre d'en avoir besoin
+		return (1);
+	if (pthread_mutex_init(&rules->all_philos[i].state, NULL) != 0)
+		return (1);
 	return (0);
 }
 
@@ -48,12 +57,11 @@ int	init_philos(t_rules *rules)
 		else
 			rules->all_philos[i].right_fork_id = i - 1;
 		rules->all_philos[i].times_eaten = 0;
-		rules->all_philos[i].time_last_meal = rules->start_time; //Au debut on prend le temps du debut de la simulation
-		rules->all_philos[i].is_dead = &rules->are_dead;
 		rules->all_philos[i].rules = rules;
-		if (pthread_mutex_init(&rules->all_philos[i].dead, NULL) != 0) //pas sûre d'en avoir besoin
-			return (error("Failed to init mutexes\n"), 1);
+		if (init_philo_mutexes(rules, i) == 1)
+			return (error("Failed to init mutexes\n"), 1);	
 		rules->all_philos[i].dead = &rules->have_died;
+		rules->all_philos[i].state = &rules->msg;
 		i++;
 	}
 	return (0);
@@ -65,7 +73,7 @@ int	init_basics(t_rules *rules, char **argv)
 	rules->time_to_die = atoi(argv[2]); //en millisecondes
 	rules->time_to_eat = atoi(argv[3]); //en millisecondes
 	rules->time_to_sleep = atoi(argv[4]); //en millisecondes
-	rules->eaten_all = false; //0
+	rules->eaten_all = false; //0 ->variale à exploiter!
 	rules->are_dead = false; //0
 	if (rules->nb_philos < 1 || rules->nb_philos > 62464 || rules->time_to_die <= 0
 		|| rules->time_to_eat <= 0 || rules->time_to_sleep <= 0)
@@ -78,7 +86,7 @@ int	init_basics(t_rules *rules, char **argv)
 	}
 	else
 		rules->times_must_eat = -1;
-	if (init_main_mutexes(rules) == 1 || init_philos(rules) == 1)
+	if ((init_main_mutexes(rules) == 1) || (init_philos(rules) == 1))
 		return (1);
 	return (0);	
 }

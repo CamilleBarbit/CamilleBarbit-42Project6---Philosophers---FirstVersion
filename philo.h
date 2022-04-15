@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/14 14:36:24 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/15 12:10:26 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ struct s_philo
 	double	time_last_meal; //need to be updated everytime the philo eats //at first, it is equal to start_time
 	bool	*is_dead; //if philo dead -> he modifies the rules->are_dead directly
 	pthread_mutex_t	*dead; //mutex qui protège le booléen is_alive -> le thread checker et le thred philo y ont accès
+	pthread_mutex_t	*state;
 	pthread_t	philo;
 	struct s_rules	*rules; //pk si je mets t_rules ça ne marche pas?
 };
@@ -55,7 +56,7 @@ struct s_rules
 	bool	are_dead; //equals to 1 if at least one philo is dead
 	pthread_mutex_t	have_died; //mutex qui protège le booléen are_dead ->seul le thread checker y a accès
 	pthread_mutex_t	*forks; //un tableau de mutexes (forks)
-	pthread_mutex_t	*msg; //lock the messages
+	pthread_mutex_t	msg; //lock the messages
 	pthread_t	checker;
 	t_philo	*all_philos; //un tableau de struct de type t_philo
 };
@@ -73,6 +74,7 @@ int	init_basics(t_rules *rules, char **argv);
 int	init_philos(t_rules *rules);
 int	dispatch_philos(t_rules *rules);
 int	init_main_mutexes(t_rules *rules);
+int	init_philo_mutexes(t_rules *rules, int i);
 
 /*
 PARSING UTILS
