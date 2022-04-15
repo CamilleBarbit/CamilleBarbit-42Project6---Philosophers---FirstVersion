@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 15:19:44 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/15 16:46:36 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ struct s_philo
 	double	time_last_meal; //need to be updated everytime the philo eats //at first, it is equal to start_time
 	bool	*is_dead; //if philo dead -> he modifies the rules->are_dead directly
 	pthread_mutex_t	*dead; //mutex qui protège le booléen is_alive -> le thread checker et le thred philo y ont accès
-	pthread_mutex_t	*state; //mutex qui protège les messages -> contient l'adresse de rules->msg
+	pthread_mutex_t	*state;
 	pthread_t	philo;
 	struct s_rules	*rules; //pk si je mets t_rules ça ne marche pas?
 };

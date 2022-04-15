@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 15:16:11 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/15 16:47:46 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ int	init_main_mutexes(t_rules *rules)
 
 int	init_philo_mutexes(t_rules *rules, int i)
 {
-	if (pthread_mutex_init(rules->all_philos[i].dead, NULL) != 0) //pas sûre d'en avoir besoin
-		return (1);
-	if (pthread_mutex_init(rules->all_philos[i].state, NULL) != 0)
-		return (1);
+	//if (pthread_mutex_init(&rules->all_philos[i].dead, NULL) != 0) //pas sûre d'en avoir besoin
+	//	return (1);
+	//if (pthread_mutex_init(&rules->all_philos[i].state, NULL) != 0)
+	//	return (1);
+	(void) rules;
+	(void) i;
 	return (0);
 }
 
@@ -46,7 +48,7 @@ int	init_philos(t_rules *rules)
 	int	i;
 
 	i = 0;
-	if (!(rules->all_philos = malloc(sizeof(t_philo) * rules->nb_philos)))
+	if (!(rules->all_philos = malloc(sizeof(t_philo) * (rules->nb_philos + 1))))
 		return (error("Malloc failed\n"), 1);
 	while (i < rules->nb_philos)
 	{
@@ -58,8 +60,8 @@ int	init_philos(t_rules *rules)
 			rules->all_philos[i].right_fork_id = i - 1;
 		rules->all_philos[i].times_eaten = 0;
 		rules->all_philos[i].rules = rules;
-		if (init_philo_mutexes(rules, i) == 1)
-			return (error("Failed to init mutexes\n"), 1);	
+		//if (init_philo_mutexes(rules, i) == 1)
+		//	return (error("Failed to init mutexes\n"), 1);
 		rules->all_philos[i].dead = &rules->have_died;
 		rules->all_philos[i].state = &rules->msg;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:15:36 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 15:19:02 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/15 16:14:31 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 double	get_time()
 {
-	struct timeval  *time;
+	struct timeval  time;
 	double	time_now;
 	
-	gettimeofday(time, NULL); //il me dit à la compilation que la variable time n'est pas déclarée
-	time_now = ((time->tv_sec * 1000) + (time->tv_usec / 1000));
+	gettimeofday(&time, NULL); //il me dit à la compilation que la variable time n'est pas déclarée
+	time_now = ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 	return (time_now);
 }
 

@@ -6,11 +6,11 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 15:19:35 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/15 16:52:37 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.c"
+#include "philo.h"
 
 void	philo_is_eating(t_philo *philo, t_rules *rules)
 {
@@ -53,8 +53,8 @@ void	*ft_start_daily_routine(void *arg)
 	
 	philo = (t_philo*)arg;
 	rules = philo->rules;
-
-	while(*(philo->is_dead) == false && eaten_enough(philo, rules) != 0)
+	
+	while(rules->are_dead == false && eaten_enough(philo, rules) != 0)
 	{
 		if (can_philo_eat(philo, rules) == 1)
 			return (NULL);
