@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:15:36 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 14:41:07 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/15 15:19:02 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	get_diff(double time)
 	return (diff);
 }
 
-void	usleep_eat_think(t_rules *rules, double time)
+void	usleep_eat_think(double time)
 {
 	double i;
 

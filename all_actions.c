@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 14:37:34 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/15 15:19:35 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	philo_is_eating(t_philo *philo, t_rules *rules)
 	action(rules, philo, "is eating");
 	philo->status = 0; //le philo mange
 	philo->time_last_meal = get_time(); //Update heure du début de dernier repas
-	usleep_eat_think(rules, rules->time_to_eat);
+	usleep_eat_think(rules->time_to_eat);
 	philo->times_eaten++;
 }
 
@@ -25,7 +25,7 @@ int	can_philo_eat(t_philo *philo, t_rules *rules)
 {
 	if (grab_forks(philo, rules) == 1)
 		return (1);
-	if (get_diff(rules->time_last_meal) + rules->time_to_eat < rules->time_to_die)
+	if (get_diff(philo->time_last_meal) + rules->time_to_eat < rules->time_to_die)
 		philo_is_eating(philo, rules);
 	else
 	{
@@ -43,7 +43,7 @@ void	philo_is_sleeping(t_philo *philo, t_rules *rules)
 {
 	action(rules, philo, "is sleeping");
 	philo->status = 1; //le philo dort
-	usleep_eat_think(rules, rules->time_to_sleep);
+	usleep_eat_think(rules->time_to_sleep);
 }
 
 void	*ft_start_daily_routine(void *arg)

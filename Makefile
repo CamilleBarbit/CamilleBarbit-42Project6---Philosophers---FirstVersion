@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+         #
+#    By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/28 15:54:51 by camillebarb       #+#    #+#              #
-#    Updated: 2022/04/13 17:25:53 by camillebarb      ###   ########.fr        #
+#    Updated: 2022/04/15 15:22:21 by cbarbit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ C_FILES = philo.c \
 		check_philo_state.c \
 		messages.c \
 		utils.c \
+		lock.c \
 		parsing/parsing.c \
 		parsing/utils.c \
 		parsing/overflow_utils.c \

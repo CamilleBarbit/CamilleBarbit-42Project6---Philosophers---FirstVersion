@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 14:10:44 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/15 15:16:11 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	init_main_mutexes(t_rules *rules)
 
 int	init_philo_mutexes(t_rules *rules, int i)
 {
-	if (pthread_mutex_init(&rules->all_philos[i].dead, NULL) != 0) //pas sûre d'en avoir besoin
+	if (pthread_mutex_init(rules->all_philos[i].dead, NULL) != 0) //pas sûre d'en avoir besoin
 		return (1);
-	if (pthread_mutex_init(&rules->all_philos[i].state, NULL) != 0)
+	if (pthread_mutex_init(rules->all_philos[i].state, NULL) != 0)
 		return (1);
 	return (0);
 }

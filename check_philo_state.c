@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:00:06 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/15 11:33:00 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/15 15:19:29 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	philo_is_dead(t_philo *philo, t_rules *rules)
 	*(philo->is_dead) = true;
 	philo->status = 3; //philo is dead
 	action(rules, philo, "died");
-	usleep_eat_think(rules, rules->time_to_die - get_diff(rules->time_last_meal));
+	usleep_eat_think(rules->time_to_die - get_diff(philo->time_last_meal));
 	if (pthread_mutex_unlock(philo->dead) != 0)
 		return (1);
 	return (0);
