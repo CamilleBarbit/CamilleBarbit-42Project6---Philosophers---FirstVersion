@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/18 11:54:52 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/18 16:04:48 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,46 @@ void	*ft_start_daily_routine(void *arg)
 	
 	philo = (t_philo*)arg;
 	rules = philo->rules;
-	
-
+	if (pthread_create(&rules->checker, NULL, ft_check_threads, &rules) != 0)
+		return (NULL);
+	if (pthread_mutex_lock(philo->dead) != 0)
+		return (NULL);
 	while(rules->are_dead == false && eaten_enough(philo, rules) != 0)
 	{
+		if (pthread_mutex_unlock(philo->dead) != 0)
+			return (NULL);
 		if (philo_is_eating(philo, rules) == 1)
 			return (NULL);
 		philo_is_sleeping(philo, rules);
-		// if (philo->status != 0)
-		// {
-			// philo->status = 2; //le philo pense
 		action(rules, philo, "is thinking");
-		// }
 	}
+	if (pthread_join(rules->checker, NULL) != 0)
+		return (NULL);
 	return (NULL);
 }
+
+// void	*ft_start_daily_routine(void *arg)
+// {
+// 	t_rules	*rules;
+	
+// 	rules = (t_rules*)arg;
+// 	if (pthread_create(&rules->checker, NULL, ft_check_threads, &rules) != 0)
+// 		return (NULL);
+// 	if (pthread_mutex_lock(rules->all_philos->dead) != 0)
+// 		return (NULL);
+// 	while(rules->are_dead == false && eaten_enough(rules->all_philos, rules) != 0)
+// 	{
+// 		if (pthread_mutex_unlock(rules->all_philos->dead) != 0)
+// 			return (NULL);
+// 		if (philo_is_eating(rules->all_philos, rules) == 1)
+// 			return (NULL);
+// 		philo_is_sleeping(rules->all_philos, rules);
+// 		action(rules, rules->all_philos, "is thinking");
+// 	}
+// 	if (pthread_join(rules->checker, NULL) != 0)
+// 		return (NULL);
+// 	return (NULL);
+// }
 
 //rules->are_dead == false && eaten_enough(philo, rules) != 0
 /*
