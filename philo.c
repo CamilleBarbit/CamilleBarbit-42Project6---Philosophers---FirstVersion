@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/18 16:06:12 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/18 17:51:25 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,21 @@ int	dispatch_philos(t_rules *rules)
 		//usleep(100); //à voir si c'est utile
 		i++;
 	}
+	if (pthread_create(&rules->checker, NULL, ft_check_threads, rules) != 0)
+		return (1);
+	
+	// SI thread return n
+
+	//ICI TU ARRETES TOUT LES PHILOS
+	// for each philo (thread) tu vais arreter la thread ici.
+	// exit(1);
+
 	i = 0;
 	while (i < rules->nb_philos)
 		if (pthread_join(rules->all_philos[i++].philo, NULL) != 0)
 			return (1);
+	if (pthread_join(rules->checker, NULL) != 0)
+		return (1);
 	return (0);
 }
 
