@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:00:06 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/18 15:49:32 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/18 17:56:27 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	*ft_check_threads(void *arg)
 	//t_philo	*philo;
 	int	i;
     
-	rules = (t_rules *)arg;
+	rules = (t_rules*)arg;
 	//philo = rules->all_philos;
 	while (1)
 	{
@@ -46,20 +46,20 @@ void	*ft_check_threads(void *arg)
 		usleep(100);
 		while (i < rules->nb_philos)
 		{
-			// if (check_die(rules->all_philos[i], *rules) == 1)
-			// {
-			// 	if (philo_is_dead(&rules->all_philos[i], rules) == 1)
-			// 		return (NULL);
-			// 	return (NULL);
-			// }
 			if (get_diff(rules->all_philos[i].time_last_meal) >= rules->time_to_die)
 			{
-				if (pthread_mutex_lock(&rules->have_died) != 0)
-					return (NULL);
-				rules->are_dead = true;
+				//printf("**Here\n");
+				pthread_mutex_lock(&rules->have_died);
+					//return (NULL);
+				//printf("**Here1\n");
+				if (rules->are_dead == false)
+					rules->are_dead = true;
+				//printf("**Here2\n");
 				action(rules, &rules->all_philos[i], "died");
-				if (pthread_mutex_unlock(&rules->have_died) != 0)
-					return (NULL);
+				pthread_mutex_unlock(&rules->have_died);
+					//return (NULL);
+				//printf("-->Here\n");
+				return (NULL);
 			}
 			i++;
 		}
