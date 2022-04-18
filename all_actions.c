@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/18 17:56:08 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/18 18:19:00 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	*ft_start_daily_routine(void *arg)
 			return (NULL);
 		philo_is_sleeping(philo, rules);
 		action(rules, philo, "is thinking");
-		printf("SHOULD I STOP? %i\n", rules->are_dead);
 		if (rules->are_dead == true)
 			return (NULL);
 		if (pthread_mutex_unlock(philo->dead) != 0)
