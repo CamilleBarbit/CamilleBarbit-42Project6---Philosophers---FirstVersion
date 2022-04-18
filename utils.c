@@ -6,18 +6,18 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:15:36 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 16:14:31 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/18 15:43:09 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-double	get_time()
+long	get_time()
 {
 	struct timeval  time;
-	double	time_now;
+	long	time_now;
 	
-	gettimeofday(&time, NULL); //il me dit à la compilation que la variable time n'est pas déclarée
+	gettimeofday(&time, NULL);
 	time_now = ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 	return (time_now);
 }
@@ -31,22 +31,21 @@ int	eaten_enough(t_philo *philo, t_rules *rules)
 	return (0);
 }
 
-double	get_diff(double time)
+long	get_diff(long time)
 {
-	double  i;
-	double  diff;
+	long  i;
+	long  diff;
 
 	i = get_time();
 	diff = i - time;
 	return (diff);
 }
 
-void	usleep_eat_think(double time)
+void	usleep_eat_think(long time)
 {
-	double i;
+	long	time_t;
 
-	i = get_time(); //l'heure à laquelle je commence mon action
-	while (get_time() - i < time)
-		if (usleep(50) != 0)
-			return;
+	time_t = get_time();
+	while (get_time() - time_t < time)
+		usleep(500);
 }
