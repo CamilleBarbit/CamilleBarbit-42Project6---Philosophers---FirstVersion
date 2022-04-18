@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:00:06 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/18 17:56:27 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/18 18:27:02 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,23 @@
 void	*ft_check_threads(void *arg)
 {
 	t_rules	*rules;
-	//t_philo	*philo;
 	int	i;
     
 	rules = (t_rules*)arg;
-	//philo = rules->all_philos;
 	while (1)
 	{
 		i = 0;
-		usleep(100);
+		//usleep(100);
 		while (i < rules->nb_philos)
 		{
 			if (get_diff(rules->all_philos[i].time_last_meal) >= rules->time_to_die)
 			{
-				//printf("**Here\n");
 				pthread_mutex_lock(&rules->have_died);
-					//return (NULL);
-				//printf("**Here1\n");
 				if (rules->are_dead == false)
 					rules->are_dead = true;
-				//printf("**Here2\n");
-				action(rules, &rules->all_philos[i], "died");
+				if (action_dead(rules, &rules->all_philos[i], "died") == 1)
+					return (NULL);
 				pthread_mutex_unlock(&rules->have_died);
-					//return (NULL);
-				//printf("-->Here\n");
 				return (NULL);
 			}
 			i++;
