@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:32:55 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/18 15:31:12 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/18 18:02:15 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	error(char *str)
 
 int	action(t_rules *rules, t_philo *philo, char *str)
 {
+	// pthread_mutex_lock(philo->dead);
+	// if (rules->are_dead == true)
+	// {
+	// 	pthread_mutex_unlock(philo->dead);
+	// 	return (1);
+	// }
+	// pthread_mutex_unlock(philo->dead);
 	if (pthread_mutex_lock(philo->state) != 0)
 		return (1);
 	printf("[%ld] ", (get_time() - rules->start_time)); //pour calculer le timestamp
