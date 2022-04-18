@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:32:55 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 12:09:12 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/18 15:31:12 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	action(t_rules *rules, t_philo *philo, char *str)
 {
 	if (pthread_mutex_lock(philo->state) != 0)
 		return (1);
-	printf("%f ", (get_time() - rules->start_time)); //pour calculer le timestamp
+	printf("[%ld] ", (get_time() - rules->start_time)); //pour calculer le timestamp
 	printf("%d ", philo->philo_id);
 	printf("%s\n", str);
 	if (pthread_mutex_unlock(philo->state) != 0)
