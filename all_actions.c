@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/18 18:19:00 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/19 10:47:51 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	philo_is_eating(t_philo *philo, t_rules *rules)
 {
+	// if (philo->philo_id % 2 == 1 && philo->times_eaten == 1) //ajouté
+	// 	usleep(100);
 	if (grab_forks(philo, rules) == 1)
 		return (1);
 	action(rules, philo, "is eating");
@@ -25,25 +27,6 @@ int	philo_is_eating(t_philo *philo, t_rules *rules)
 		return (1);
 	return (0);
 }
-
-// int	can_philo_eat(t_philo *philo, t_rules *rules)
-// {
-// 	if (grab_forks(philo, rules) == 1)
-// 		return (1);
-// 	if (get_diff(philo->time_last_meal) + rules->time_to_eat < rules->time_to_die)
-// 		philo_is_eating(philo, rules);
-// 	else
-// 	{
-// 		philo_is_dead(philo, rules);
-// 		if (drop_forks(philo, rules) == 1)
-// 			return (1);
-// 		return (1);
-// 	}
-// 	philo_is_eating(philo, rules);
-// 	if (drop_forks(philo, rules) == 1)
-// 		return (1);
-// 	return (0);
-// }
 
 void	philo_is_sleeping(t_philo *philo, t_rules *rules)
 {
@@ -61,15 +44,16 @@ void	*ft_start_daily_routine(void *arg)
 	rules = philo->rules;
 	if (pthread_mutex_lock(philo->dead) != 0)
 		return (NULL);
+	// if (philo->philo_id % 2 == 0) //ajouté
+	// 	usleep(100);
 	while(rules->are_dead == false && eaten_enough(philo, rules) != 0)
 	{
-	
 		if (philo_is_eating(philo, rules) == 1)
-			return (NULL);
+			return (pthread_mutex_lock(philo->dead), NULL); //ajouté le lock
 		philo_is_sleeping(philo, rules);
 		action(rules, philo, "is thinking");
 		if (rules->are_dead == true)
-			return (NULL);
+			return (pthread_mutex_unlock(philo->dead), NULL); //ajouté le unlock
 		if (pthread_mutex_unlock(philo->dead) != 0)
 			return (NULL);
 	}

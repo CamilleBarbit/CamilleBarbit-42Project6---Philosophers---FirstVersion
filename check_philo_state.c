@@ -6,31 +6,11 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:00:06 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/18 18:27:02 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/19 11:19:01 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// int	philo_is_dead(t_philo *philo, t_rules *rules)
-// {
-// 	if (pthread_mutex_lock(&rules->have_died) != 0)
-// 		return (1);
-// 	rules->are_dead = true;
-// 	philo->status = 3; //philo is dead
-// 	action(rules, philo, "died");
-// 	usleep_eat_think(rules->time_to_die - get_diff(philo->time_last_meal));
-// 	if (pthread_mutex_unlock(&rules->have_died) != 0)
-// 		return (1);
-// 	return (0);
-// }
-
-// int check_die(t_philo philo, t_rules rules)
-// {
-// 	if (get_diff(philo.time_last_meal) >= rules.time_to_die)
-// 		return (1);
-// 	return (0);
-// }
 
 void	*ft_check_threads(void *arg)
 {
@@ -44,11 +24,14 @@ void	*ft_check_threads(void *arg)
 		//usleep(100);
 		while (i < rules->nb_philos)
 		{
-			if (get_diff(rules->all_philos[i].time_last_meal) >= rules->time_to_die)
+			if (get_diff(rules->all_philos[i].time_last_meal) >= (rules->time_to_die + 10))
 			{
 				pthread_mutex_lock(&rules->have_died);
 				if (rules->are_dead == false)
 					rules->are_dead = true;
+				printf("Philo ID: %d\n", rules->all_philos[i].philo_id);
+				printf("Time to die: %ld\n", rules->time_to_die);
+				printf("Time since last meal: %ld\n", get_diff(rules->all_philos[i].time_last_meal));
 				if (action_dead(rules, &rules->all_philos[i], "died") == 1)
 					return (NULL);
 				pthread_mutex_unlock(&rules->have_died);
