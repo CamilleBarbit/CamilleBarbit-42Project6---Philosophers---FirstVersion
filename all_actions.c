@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/19 10:47:51 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/19 11:50:32 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	philo_is_eating(t_philo *philo, t_rules *rules)
 	if (grab_forks(philo, rules) == 1)
 		return (1);
 	action(rules, philo, "is eating");
-	// philo->status = 0; //le philo mange
+	philo->status = 0; //le philo mange
 	philo->time_last_meal = get_time(); //Update heure du début de dernier repas
 	usleep_eat_think(rules->time_to_eat);
 	philo->times_eaten++;
@@ -31,7 +31,7 @@ int	philo_is_eating(t_philo *philo, t_rules *rules)
 void	philo_is_sleeping(t_philo *philo, t_rules *rules)
 {
 	action(rules, philo, "is sleeping");
-	// philo->status = 1; //le philo dort
+	philo->status = 1; //le philo dort
 	usleep_eat_think(rules->time_to_sleep);
 }
 
@@ -51,7 +51,11 @@ void	*ft_start_daily_routine(void *arg)
 		if (philo_is_eating(philo, rules) == 1)
 			return (pthread_mutex_lock(philo->dead), NULL); //ajouté le lock
 		philo_is_sleeping(philo, rules);
-		action(rules, philo, "is thinking");
+		if (philo->status != 0)
+		{
+			philo->status = 2;
+			action(rules, philo, "is thinking");
+		}
 		if (rules->are_dead == true)
 			return (pthread_mutex_unlock(philo->dead), NULL); //ajouté le unlock
 		if (pthread_mutex_unlock(philo->dead) != 0)

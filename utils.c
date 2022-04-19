@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:15:36 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/19 11:17:18 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/19 11:44:09 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ long	get_diff(long time)
 	i = get_time();
 	//printf("TIME: %ld\n", i);
 	diff = i - time;
-	printf("DIFF TIME_NOW - TIME_LAST_EAT: %ld\n", diff);	
+	//printf("DIFF TIME_NOW - TIME_LAST_EAT: %ld\n", diff);	
 	return (diff);
 }
 
