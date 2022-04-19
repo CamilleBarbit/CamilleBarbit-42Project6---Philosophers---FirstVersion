@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_philo_state.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:00:06 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/19 11:55:11 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/19 17:54:55 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ void	*ft_check_threads(void *arg)
 		//usleep(100);
 		while (i < rules->nb_philos)
 		{
+			if (pthread_mutex_lock(&rules->all_philos[i].time_eat) != 0)
+				return (NULL);
 			if (get_diff(rules->all_philos[i].time_last_meal) >= (rules->time_to_die + 10) && rules->all_philos[i].status != 0)
 			{
+				if (pthread_mutex_unlock(&rules->all_philos[i].time_eat) != 0)
+					return (NULL);				
 				pthread_mutex_lock(&rules->have_died);
 				if (rules->are_dead == false)
 					rules->are_dead = true;
@@ -37,6 +41,8 @@ void	*ft_check_threads(void *arg)
 				pthread_mutex_unlock(&rules->have_died);
 				return (NULL);
 			}
+			if (pthread_mutex_unlock(&rules->all_philos[i].time_eat) != 0)
+				return (NULL);
 			i++;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/19 11:50:32 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/19 17:54:09 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ int	philo_is_eating(t_philo *philo, t_rules *rules)
 		return (1);
 	action(rules, philo, "is eating");
 	philo->status = 0; //le philo mange
+	if (pthread_mutex_lock(&philo->time_eat) != 0)
+			return (1);
 	philo->time_last_meal = get_time(); //Update heure du début de dernier repas
+	if (pthread_mutex_unlock(&philo->time_eat) != 0)
+			return (1);
 	usleep_eat_think(rules->time_to_eat);
 	philo->times_eaten++;
 	if (drop_forks(philo, rules) == 1)
@@ -42,12 +46,16 @@ void	*ft_start_daily_routine(void *arg)
 	
 	philo = (t_philo*)arg;
 	rules = philo->rules;
-	if (pthread_mutex_lock(philo->dead) != 0)
-		return (NULL);
 	// if (philo->philo_id % 2 == 0) //ajouté
 	// 	usleep(100);
-	while(rules->are_dead == false && eaten_enough(philo, rules) != 0)
+	while(eaten_enough(philo, rules) != 0)
 	{
+		if (pthread_mutex_lock(philo->dead) != 0)
+			return (NULL);
+		if (rules->are_dead == true)
+			return (pthread_mutex_unlock(philo->dead), NULL);
+		if (pthread_mutex_unlock(philo->dead) != 0)
+			return (NULL);
 		if (philo_is_eating(philo, rules) == 1)
 			return (pthread_mutex_lock(philo->dead), NULL); //ajouté le lock
 		philo_is_sleeping(philo, rules);
@@ -56,10 +64,8 @@ void	*ft_start_daily_routine(void *arg)
 			philo->status = 2;
 			action(rules, philo, "is thinking");
 		}
-		if (rules->are_dead == true)
-			return (pthread_mutex_unlock(philo->dead), NULL); //ajouté le unlock
-		if (pthread_mutex_unlock(philo->dead) != 0)
-			return (NULL);
+		// if (rules->are_dead == true)
+		// 	return (pthread_mutex_unlock(philo->dead), NULL);
 	}
 	return (NULL);
 }

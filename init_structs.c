@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/15 17:40:57 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/19 17:53:16 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	init_philos(t_rules *rules)
 		rules->all_philos[i].rules = rules;
 		rules->all_philos[i].dead = &rules->have_died;
 		rules->all_philos[i].state = &rules->msg;
+		if (pthread_mutex_init(&rules->all_philos[i].time_eat, NULL) != 0)
+			return (error("Failed to init mutexes\n"), 1);
 		i++;
 	}
 	return (0);

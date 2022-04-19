@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:57:03 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/19 11:45:44 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/19 17:48:56 by camillebarb      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ struct s_philo
 	long	time_last_meal; //need to be updated everytime the philo eats //at first, it is equal to start_time
 	pthread_mutex_t	*dead; //mutex qui protège le booléen is_alive -> le thread checker et le thred philo y ont accès
 	pthread_mutex_t	*state;
+	pthread_mutex_t	time_eat;
 	pthread_t	philo;
 	struct s_rules	*rules; //pk si je mets t_rules ça ne marche pas?
 };
