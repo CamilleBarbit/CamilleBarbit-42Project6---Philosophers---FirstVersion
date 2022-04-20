@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lock.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camillebarbit <camillebarbit@student.42    +#+  +:+       +#+        */
+/*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 10:26:19 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/14 11:20:58 by camillebarb      ###   ########.fr       */
+/*   Updated: 2022/04/20 14:22:06 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	grab_forks(t_philo *philo, t_rules *rules)
 
 int	drop_forks(t_philo *philo, t_rules *rules)
 {
-	if (pthread_mutex_unlock(&rules->forks[philo->left_fork_id]) != 0)
-		return (1);
-	action(rules, philo, "has dropped [left] fork");
 	if (pthread_mutex_unlock(&rules->forks[philo->right_fork_id]) != 0)
 		return (1);
 	action(rules, philo, "has dropped [right] fork");
+	if (pthread_mutex_unlock(&rules->forks[philo->left_fork_id]) != 0)
+		return (1);
+	action(rules, philo, "has dropped [left] fork");
 	return (0);
 }
