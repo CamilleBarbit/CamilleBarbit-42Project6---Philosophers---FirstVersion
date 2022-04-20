@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:31:00 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/20 14:34:20 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/20 14:40:07 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int		action(t_rules *rules, t_philo *philo, char *str);
 int		philo_is_dead(t_philo *philo, t_rules *rules);
 int		check_die(t_philo philo, t_rules rules);
 int		action_dead(t_rules *rules, t_philo *philo, char *str);
+int		odd_philos(t_rules *rules);
+int		even_philos(t_rules *rules);
 /*
 ROUTINE UTILS
 */
