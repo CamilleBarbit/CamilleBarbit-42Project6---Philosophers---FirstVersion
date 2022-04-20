@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/20 14:24:56 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/20 15:46:51 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,6 @@ void	*ft_start_daily_routine(void *arg)
 				return (NULL);
 			action(rules, philo, "is thinking");
 		}
-		// if (pthread_mutex_unlock(&philo->state) != 0)
-		// 	return (NULL);
-		// if (rules->are_dead == true)
-		// 	return (pthread_mutex_unlock(philo->dead), NULL);
 	}
 	return (NULL);
 }
