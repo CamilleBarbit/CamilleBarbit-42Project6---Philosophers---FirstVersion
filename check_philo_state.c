@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:00:06 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/21 11:45:38 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/21 11:59:45 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ void	*ft_check_threads(void *arg)
 		//usleep(100);
 		while (i < rules->nb_philos)
 		{
+			if (pthread_mutex_lock(&rules->all_philos[i].nb_meals) != 0)
+				return (NULL);
 			if (rules->all_philos[i].times_eaten == rules->times_must_eat)
+				return (NULL);
+			if (pthread_mutex_unlock(&rules->all_philos[i].nb_meals) != 0)
 				return (NULL);
 			if (pthread_mutex_lock(&rules->all_philos[i].time_eat) != 0)
 				return (NULL);
@@ -33,7 +37,7 @@ void	*ft_check_threads(void *arg)
 			if ((get_diff(rules->all_philos[i].time_last_meal) >= rules->time_to_die))
 			{
 				if (pthread_mutex_unlock(&rules->all_philos[i].state) != 0)
-					return (NULL);	
+					return (NULL);
 				if (pthread_mutex_unlock(&rules->all_philos[i].time_eat) != 0)
 					return (NULL);	
 				pthread_mutex_lock(&rules->have_died);
