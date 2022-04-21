@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:31:00 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/21 11:13:53 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/21 11:56:51 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ struct s_philo
 	pthread_mutex_t	*philo_msg;
 	pthread_mutex_t	state;
 	pthread_mutex_t	time_eat;
+	pthread_mutex_t	nb_meals;
 	pthread_t		philo;
 	struct s_rules	*rules;
 };
