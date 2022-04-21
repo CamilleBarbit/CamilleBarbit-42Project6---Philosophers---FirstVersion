@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/20 14:44:03 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/21 11:28:14 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,16 @@ int	dispatch_philos(t_rules *rules)
 		return (1);
 	i = 0;
 	while (i < rules->nb_philos)
+	{
+		if (rules->nb_philos == 1)
+		{
+			pthread_detach(rules->all_philos[i].philo);
+			break;
+		}
 		if (pthread_join(rules->all_philos[i++].philo, NULL) != 0)
 			return (1);
+	}
+
 	if (pthread_join(rules->checker, NULL) != 0)
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:31:00 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/20 14:40:07 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/21 11:13:53 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ DAILY ROUTINE
 void	*ft_start_daily_routine(void *arg);
 void	*ft_check_threads(void *arg);
 void	usleep_eat_think(long time);
+void	die_alone(t_rules *rules, t_philo *philo);
 int		philo_is_sleeping(t_philo *philo, t_rules *rules);
 int		philo_is_eating(t_philo *philo, t_rules *rules);
 int		eaten_enough(t_philo *philo, t_rules *rules);
