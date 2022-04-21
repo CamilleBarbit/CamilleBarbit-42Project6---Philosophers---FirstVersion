@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:00:06 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/21 11:28:06 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/21 11:45:38 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	*ft_check_threads(void *arg)
 		//usleep(100);
 		while (i < rules->nb_philos)
 		{
+			if (rules->all_philos[i].times_eaten == rules->times_must_eat)
+				return (NULL);
 			if (pthread_mutex_lock(&rules->all_philos[i].time_eat) != 0)
 				return (NULL);
 			if (pthread_mutex_lock(&rules->all_philos[i].state) != 0)
