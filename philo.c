@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/22 15:26:23 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 15:50:52 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	launch_philos(t_rules *rules)
 	return (0);
 }
 
-
 int	dispatch_philos(t_rules *rules)
 {
 	int	i;
@@ -45,7 +44,7 @@ int	dispatch_philos(t_rules *rules)
 		if (rules->nb_philos == 1)
 		{
 			pthread_detach(rules->all_philos[i].philo);
-			break;
+			break ;
 		}
 		if (pthread_join(rules->all_philos[i++].philo, NULL) != 0)
 			return (1);
