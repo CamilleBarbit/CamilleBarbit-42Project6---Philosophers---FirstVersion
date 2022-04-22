@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/22 16:24:59 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 17:16:27 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_main_mutexes(t_rules *rules)
 
 	i = 0;
 	rules->forks = malloc(sizeof(pthread_mutex_t) * (rules->nb_philos));
-	if (rules->forks)
+	if (!rules->forks)
 		return (error("Malloc failed\n"), 1);
 	while (i < rules->nb_philos)
 	{
