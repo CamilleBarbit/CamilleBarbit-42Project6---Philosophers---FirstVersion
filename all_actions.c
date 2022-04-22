@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/21 11:57:25 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 13:37:33 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	philo_is_eating(t_philo *philo, t_rules *rules)
 		return (1);
 	action(rules, philo, "is eating");
 	if (pthread_mutex_lock(&philo->time_eat) != 0)
-			return (1);
+		return (1);
 	philo->time_last_meal = get_time();
 	if (pthread_mutex_unlock(&philo->time_eat) != 0)
-			return (1);
+		return (1);
 	usleep_eat_think(rules->time_to_eat);
 	if (pthread_mutex_lock(&philo->nb_meals) != 0)
-			return (1);
+		return (1);
 	philo->times_eaten++;
 	if (pthread_mutex_unlock(&philo->nb_meals) != 0)
 			return (1);
