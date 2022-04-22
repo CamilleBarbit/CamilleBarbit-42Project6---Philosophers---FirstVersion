@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:02:20 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/22 13:37:33 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 16:02:18 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	philo_is_eating(t_philo *philo, t_rules *rules)
 		return (1);
 	philo->times_eaten++;
 	if (pthread_mutex_unlock(&philo->nb_meals) != 0)
-			return (1);
+		return (1);
 	if (drop_forks(philo, rules) == 1)
 		return (1);
 	return (0);
@@ -50,20 +50,27 @@ int	philo_is_sleeping(t_philo *philo, t_rules *rules)
 	return (0);
 }
 
+static int	check_death_status(t_philo *philo, t_rules *rules)
+{
+	if (pthread_mutex_lock(philo->dead) != 0)
+		return (1);
+	if (rules->are_dead == true)
+		return (pthread_mutex_unlock(philo->dead), 1);
+	if (pthread_mutex_unlock(philo->dead) != 0)
+		return (1);
+	return (0);
+}
+
 void	*ft_start_daily_routine(void *arg)
 {
 	t_philo	*philo;
 	t_rules	*rules;
-	
-	philo = (t_philo*)arg;
+
+	philo = (t_philo *)arg;
 	rules = philo->rules;
-	while(eaten_enough(philo, rules) != 0)
+	while (eaten_enough(philo, rules) != 0)
 	{
-		if (pthread_mutex_lock(philo->dead) != 0)
-			return (NULL);
-		if (rules->are_dead == true)
-			return (pthread_mutex_unlock(philo->dead), NULL);
-		if (pthread_mutex_unlock(philo->dead) != 0)
+		if (check_death_status(philo, rules) == 1)
 			return (NULL);
 		if (philo_is_eating(philo, rules) == 1)
 			return (NULL);
