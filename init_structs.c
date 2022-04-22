@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/22 12:50:08 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 15:40:53 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 int	init_main_mutexes(t_rules *rules)
 {
 	int	i;
-	
+
 	i = 0;
-	if (!(rules->forks = malloc(sizeof(pthread_mutex_t) * rules->nb_philos)))
+	rules->forks = malloc(sizeof(pthread_mutex_t) * rules->nb_philos);
+	if (rules->forks)
 		return (error("Malloc failed\n"), 1);
 	while (i < rules->nb_philos)
 	{
@@ -64,12 +65,12 @@ int	init_philos(t_rules *rules)
 
 int	init_basics(t_rules *rules, char **argv)
 {
-	rules->nb_philos = atoi(argv[1]); //en millisecondes
-	rules->time_to_die = atoi(argv[2]); //en millisecondes
-	rules->time_to_eat = atoi(argv[3]); //en millisecondes
-	rules->time_to_sleep = atoi(argv[4]); //en millisecondes
-	rules->eaten_all = false; //0 -> variale à exploiter!
-	rules->are_dead = false; //0
+	rules->nb_philos = atoi(argv[1]);
+	rules->time_to_die = atoi(argv[2]);
+	rules->time_to_eat = atoi(argv[3]);
+	rules->time_to_sleep = atoi(argv[4]);
+	rules->eaten_all = false;
+	rules->are_dead = false;
 	if (rules->nb_philos < 1 || rules->nb_philos > 62464 || rules->time_to_die <= 0
 		|| rules->time_to_eat <= 0 || rules->time_to_sleep <= 0)
 		return (error("Invalid argument value\n"), 1);
