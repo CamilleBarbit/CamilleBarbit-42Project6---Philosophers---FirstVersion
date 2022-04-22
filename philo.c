@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/21 11:28:14 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 13:08:22 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	dispatch_philos(t_rules *rules)
 		if (pthread_join(rules->all_philos[i++].philo, NULL) != 0)
 			return (1);
 	}
-
 	if (pthread_join(rules->checker, NULL) != 0)
 		return (1);
 	return (0);
@@ -84,8 +83,9 @@ int	main(int argc, char **argv)
 	if (!rules)
 		return (error("Malloc failed\n"), 1);
 	if (init_basics(rules, argv) == 1)
-		return (error("Failed initialising variables\n"), 1);
+		return (free_all(rules), error("Failed initialising variables\n"), 1);
 	if (dispatch_philos(rules) == 1)
-		return (1);
+		return (free_all(rules), 1);
+	free_all(rules);
 	return (0);
 }

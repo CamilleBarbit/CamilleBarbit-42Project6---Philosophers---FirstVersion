@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:51 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/21 11:58:41 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 12:50:08 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	init_philos(t_rules *rules)
 			return (error("Failed to init mutexes\n"), 1);
 		if (pthread_mutex_init(&rules->all_philos[i].nb_meals, NULL) != 0)
 			return (error("Failed to init mutexes\n"), 1);
-		// if (pthread_mutex_init(&rules->all_philos[i].state, NULL) != 0)
-		// 	return (error("Failed to init mutexes\n"), 1);
+		if (pthread_mutex_init(&rules->all_philos[i].state, NULL) != 0)
+			return (error("Failed to init mutexes\n"), 1);
 		i++;
 	}
 	return (0);

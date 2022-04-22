@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:15:36 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/21 11:28:16 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 12:53:02 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ void	usleep_eat_think(long time)
 	time_now = get_time();
 	while (get_time() - time_now < time)
 		usleep(500);
+}
+
+void	free_all(t_rules *rules)
+{
+	free(rules->forks);
+	free(rules->all_philos);
+	free(rules);
 }
