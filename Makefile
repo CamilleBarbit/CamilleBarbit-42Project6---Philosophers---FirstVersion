@@ -6,7 +6,7 @@
 #    By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/28 15:54:51 by camillebarb       #+#    #+#              #
-#    Updated: 2022/04/15 16:21:59 by cbarbit          ###   ########.fr        #
+#    Updated: 2022/04/22 13:31:49 by cbarbit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ all: ${NAME}
 	@${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME} : ${O_FILES}
-	@${CC} ${O_FILES} -pthread -o ${NAME}
+	@${CC} ${O_FILES} -fsanitize=thread -pthread -o ${NAME}
 
 clean:
 	@${RM} ${O_FILES}
