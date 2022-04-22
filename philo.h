@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:31:00 by cbarbit           #+#    #+#             */
-/*   Updated: 2022/04/22 12:53:25 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 14:37:36 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	*ft_start_daily_routine(void *arg);
 void	*ft_check_threads(void *arg);
 void	usleep_eat_think(long time);
 void	die_alone(t_rules *rules, t_philo *philo);
+void	modify_death_status(t_rules *rules);
 int		philo_is_sleeping(t_philo *philo, t_rules *rules);
 int		philo_is_eating(t_philo *philo, t_rules *rules);
 int		eaten_enough(t_philo *philo, t_rules *rules);
@@ -103,6 +104,7 @@ int		check_die(t_philo philo, t_rules rules);
 int		action_dead(t_rules *rules, t_philo *philo, char *str);
 int		odd_philos(t_rules *rules);
 int		even_philos(t_rules *rules);
+int		check_meals(t_philo *philo, t_rules *rules);
 
 /*
 ROUTINE UTILS
