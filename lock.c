@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 10:26:19 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/22 15:36:25 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 15:47:36 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	grab_forks(t_philo *philo, t_rules *rules)
 
 int	drop_forks(t_philo *philo, t_rules *rules)
 {
-
-
 	if (philo->philo_id % 2 == 0)
 	{
 		pthread_mutex_unlock(&rules->forks[philo->right_fork_id]);
@@ -55,5 +53,5 @@ int	drop_forks(t_philo *philo, t_rules *rules)
 		pthread_mutex_unlock(&rules->forks[philo->left_fork_id]);
 		pthread_mutex_unlock(&rules->forks[philo->right_fork_id]);
 	}
-	return (0);	
+	return (0);
 }
