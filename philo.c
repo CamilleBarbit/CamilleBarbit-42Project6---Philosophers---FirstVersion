@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:36:26 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/22 13:08:22 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/22 14:51:56 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,26 @@ int	odd_philos(t_rules *rules)
 				ft_start_daily_routine, &rules->all_philos[i]) != 0)
 			return (1);
 		usleep(100);
-		i += 2;
+		i += 1;
 	}
 	return (0);
 }
 
 int	even_philos(t_rules *rules)
 {
-	int	i;
+	(void)rules;
+	// int	i;
 
-	i = 1;
-	while (i < rules->nb_philos)
-	{
-		rules->all_philos[i].time_last_meal = rules->start_time;
-		if (pthread_create(&rules->all_philos[i].philo, NULL,
-				ft_start_daily_routine, &rules->all_philos[i]) != 0)
-			return (1);
-		usleep(100);
-		i += 2;
-	}
+	// i = 1;
+	// while (i < rules->nb_philos)
+	// {
+	// 	rules->all_philos[i].time_last_meal = rules->start_time;
+	// 	if (pthread_create(&rules->all_philos[i].philo, NULL,
+	// 			ft_start_daily_routine, &rules->all_philos[i]) != 0)
+	// 		return (1);
+	// 	usleep(100);
+	// 	i += 2;
+	// }
 	return (0);
 }
 
