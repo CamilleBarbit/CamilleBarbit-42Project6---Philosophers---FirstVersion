@@ -6,7 +6,7 @@
 /*   By: cbarbit <cbarbit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:15:36 by camillebarb       #+#    #+#             */
-/*   Updated: 2022/04/22 15:44:08 by cbarbit          ###   ########.fr       */
+/*   Updated: 2022/04/23 19:56:05 by cbarbit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ long	get_diff(long time)
 
 void	usleep_eat_think(long time)
 {
-	long	time_now;
-
-	time_now = get_time();
-	while (get_time() - time_now < time)
-		usleep(500);
+	usleep(time * 1000);
 }
 
 void	free_all(t_rules *rules)
